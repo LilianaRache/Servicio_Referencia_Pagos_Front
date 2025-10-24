@@ -1,0 +1,46 @@
+.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.cancel-dialog {
+  max-width: 420px;
+  padding: 8px 4px;
+}
+
+.dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.dialog-content {
+  margin-top: 8px;
+}
+
+.reference-box {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+}
+
+.reference-box .label {
+  font-weight: 600;
+  color: #555;
+}
+
+.reference-box .value {
+  color: #333;
+  font-family: monospace;
+}
+
+.dialog-actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+}

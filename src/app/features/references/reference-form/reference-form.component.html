@@ -1,0 +1,67 @@
+<div class="form-container">
+  <mat-card class="reference-card">
+    <mat-card-header>
+      <mat-card-title>Crear referencia de pago</mat-card-title>
+      <mat-card-subtitle>Rellena todos los campos obligatorios</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form (ngSubmit)="submit()" class="reference-form">
+
+        <!-- External ID -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID Externo</mat-label>
+          <input matInput [(ngModel)]="model.externalId" name="externalId" required>
+          <mat-icon matSuffix>fingerprint</mat-icon>
+        </mat-form-field>
+
+        <!-- Amount -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Monto</mat-label>
+          <input matInput type="number" [(ngModel)]="model.amount" name="amount" required>
+          <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <input matInput [(ngModel)]="model.description" name="description" required>
+          <mat-icon matSuffix>description</mat-icon>
+        </mat-form-field>
+
+        <!-- Due Date -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha de vencimiento</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="model.dueDate" name="dueDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Callback URL -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>URL de callback</mat-label>
+          <input matInput [(ngModel)]="model.callbackURL" name="callbackURL" required>
+          <mat-icon matSuffix>link</mat-icon>
+        </mat-form-field>
+
+        <!-- Error message -->
+        <div *ngIf="error" class="error-message">
+          <mat-icon>error</mat-icon> {{ error }}
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+            <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+            <span *ngIf="!loading">Crear referencia</span>
+          </button>
+
+          <button mat-stroked-button color="warn" type="button" (click)="router.navigate(['/references'])">
+            Cancelar
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

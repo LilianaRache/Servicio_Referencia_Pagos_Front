@@ -1,0 +1,51 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.reference-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: #f44336;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.error-message mat-icon {
+  margin-right: 6px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button mat-spinner {
+  margin-right: 8px;
+}
+
+::ng-deep mat-card-title {
+  text-align: center;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #ffffff;
+}

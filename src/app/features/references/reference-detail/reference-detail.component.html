@@ -1,0 +1,56 @@
+<div class="reference-container" *ngIf="!isLoading; else loading">
+  <mat-card class="p-6 max-w-md mx-auto shadow-lg rounded-2xl">
+    <h2 class="text-center mb-4 text-lg font-semibold text-gray-700">
+      🔎 Consultar comprobante de pago
+    </h2>
+
+    <form (ngSubmit)="downloadPdf()" #referenceForm="ngForm" class="space-y-4">
+      <!-- Reference -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Referencia</mat-label>
+        <input
+          matInput
+          name="reference"
+          [(ngModel)]="referenceString"
+          required
+          placeholder="Ej: REF12345"
+        />
+        <mat-error *ngIf="!referenceString">La referencia es obligatoria</mat-error>
+      </mat-form-field>
+
+      <!-- Payment ID -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>ID del Pago</mat-label>
+        <input
+          matInput
+          type="number"
+          name="paymentId"
+          [(ngModel)]="paymentId"
+          required
+          placeholder="Ej: 987654"
+        />
+        <mat-error *ngIf="!paymentId">El ID del pago es obligatorio</mat-error>
+      </mat-form-field>
+
+      <!-- Botón -->
+      <div class="text-center mt-6">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!referenceForm.valid"
+        >
+          <mat-icon>download</mat-icon>
+          Descargar comprobante
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<!-- Loader -->
+<ng-template #loading>
+  <div class="flex justify-center items-center h-40">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
