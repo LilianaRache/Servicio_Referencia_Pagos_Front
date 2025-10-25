@@ -20,12 +20,15 @@ export class LoginComponent {
   ) { }
 
 
-  submit(): void {
+  submit(event?: Event) {
+    event?.preventDefault();
+    this.loading = true;
 
     this.errorMessage = '';
 
     //TODO: ⚙️ 🔓 MODO DESARROLLO - Skip autenticación temporalmente
-    const skipAuth = true;
+    const skipAuth = false
+      ;
     if (skipAuth) {
       console.warn('⚠️ Autenticación deshabilitada temporalmente (modo desarrollo)');
       localStorage.setItem('jwtToken', 'fake-token-for-testing');
@@ -38,6 +41,7 @@ export class LoginComponent {
       return;
     }
 
+
     this.loading = true;
 
     const authRequest: AuthRequest = {
@@ -47,16 +51,22 @@ export class LoginComponent {
 
 
     this.authService.login(authRequest).subscribe({
-     next: (response) => {
-        const token = response.token;
+      next: (response) => {
+        const token = response?.data?.token;
 
         if (token) {
-          localStorage.setItem('jwtToken', token);
-          this.router.navigate(['/references']);
-        } else {
-          this.errorMessage = 'No se recibió un token válido.';
-        }
+          console.log('✅ TOKEN RECIBIDO:', token);
+          this.authService.setToken(token); // Guardar el token en el servicio de autenticación
+          localStorage.setItem('jwtToken', token); // También puedes guardarlo en localStorage si quieres persistencia
 
+          console.log('➡️ Intentando navegar a /references...');
+
+          this.router.navigate(['/references'])
+            .then(ok => console.log('🔁 Navegación result:', ok))
+            .catch(err => console.error('❌ Error al navegar:', err));
+        } else {
+          console.warn('⚠️ Token no recibido');
+        }
         this.loading = false;
       },
       error: (err) => {

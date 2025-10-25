@@ -18,23 +18,24 @@ export class PaymentReferenceService {
 
   create(model: PaymentCreateRequest): Observable<ApiResponse<PaymentCreateResponse>> {
     return this.http.post<ApiResponse<PaymentCreateResponse>>(
-      `${environment.apiBaseUrl}/payments`,
+      `${this.base}/payment`,
       model
     );
   }
 
 
   findById(reference: string, paymentId: number) {
-    const url = `${environment.apiBaseUrl}/payment/${reference}/${paymentId}`;
+    const url = `${this.base}/payment/${reference}/${paymentId}`;
     return this.http.get<ApiResponse<PaymentReferenceResponse>>(url);
   }
 
-  findAll(startCreationDate: string, endCreationDate: string): Observable<ApiResponse<PaymentReferenceResponse[]>> {
+  findAll(startCreationDate: string, endCreationDate: string, status: string): Observable<ApiResponse<PaymentReferenceResponse[]>> {
     const url = `${this.base}/payments/search`;
 
     const params = {
       startCreationDate,
-      endCreationDate
+      endCreationDate,
+      status
     };
 
     return this.http.get<ApiResponse<PaymentReferenceResponse[]>>(url, { params });
@@ -46,7 +47,7 @@ export class PaymentReferenceService {
 }
 
   downloadPdf(id: number): Observable<Blob> {
-    return this.http.get(`${this.base}/${id}/pdf`, {
+    return this.http.get(`${this.base}/payment/${id}/pdf`, {
       responseType: 'blob' // 👈 importante para recibir archivos binarios
     });
   }

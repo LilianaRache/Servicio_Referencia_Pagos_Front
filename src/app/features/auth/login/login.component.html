@@ -8,7 +8,7 @@
     <mat-card class="login-card">
       <mat-card-title class="title">USER LOGIN</mat-card-title>
       <mat-card-content>
-        <form (ngSubmit)="submit()" #loginForm="ngForm" class="login-form">
+        <form (ngSubmit)="submit($event)" #loginForm="ngForm" class="login-form">
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Usuario</mat-label>
             <input matInput [(ngModel)]="username" name="username" required />
@@ -29,3 +29,4 @@
     </mat-card>
   </div>
 </div>
+<router-outlet></router-outlet>

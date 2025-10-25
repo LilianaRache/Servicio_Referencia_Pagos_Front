@@ -15,6 +15,7 @@ export class CancelReferenceDialogComponent {
   ) {}
 
   onConfirm() {
+    this.data.status = '03';
     this.dialogRef.close(this.data);
   }
 
