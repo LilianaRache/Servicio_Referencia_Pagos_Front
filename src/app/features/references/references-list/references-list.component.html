@@ -1,122 +1,123 @@
-<!-- 🔹 Encabezado con botones de acción -->
-<mat-toolbar color="primary" class="mb-4">
-  <span>Gestión de Referencias</span>
+<!-- 🔹 Encabezado -->
+<mat-toolbar color="primary" class="toolbar">
+  <span class="title">Gestión de Referencias</span>
   <span class="spacer"></span>
-
-  <button mat-stroked-button color="warn" (click)="logout()">
-    <mat-icon>logout</mat-icon> Cerrar sesión
+  <button mat-stroked-button color="warn" (click)="logout()" class="logout-btn">
+    <mat-icon>logout</mat-icon>
+    Cerrar sesión
   </button>
 </mat-toolbar>
 
-  <div class="search-row" style="display:flex; gap:12px; align-items:center;">
-    <mat-form-field appearance="outline" class="search-field" style="flex:1; min-width:200px;">
+<!-- 🔹 Contenedor principal -->
+<div class="main-container">
+
+  <!-- 🔸 Búsqueda por referencia -->
+  <div class="search-row">
+    <mat-form-field appearance="outline" class="search-field">
       <mat-label>Referencia</mat-label>
       <input matInput [(ngModel)]="searchReferenceValue" placeholder="Ej: 12345" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="search-field" style="flex:1; min-width:200px;">
+    <mat-form-field appearance="outline" class="search-field">
       <mat-label>Payment ID</mat-label>
       <input matInput [(ngModel)]="searchPaymentIdValue" placeholder="Ej: 98765" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="searchReference()" style="height:40px;">
-      <mat-icon>search</mat-icon>
-      Buscar
+    <button mat-raised-button color="primary" (click)="searchReference()">
+      <mat-icon>search</mat-icon> Buscar
     </button>
 
-    <button mat-stroked-button (click)="clearSearch()" style="height:40px;">
-      <mat-icon>clear</mat-icon>
-      Limpiar
+    <button mat-stroked-button (click)="clearSearch()">
+      <mat-icon>clear</mat-icon> Limpiar
     </button>
   </div>
 
-  <!-- Crear nueva referencia -->
-  <button mat-raised-button color="accent" (click)="openCreateDialog()">
-    <mat-icon>add_circle</mat-icon> Crear referencia
-  </button>
+  <!-- 🔸 Sección de filtros -->
+  <mat-card class="filter-card mat-elevation-z4">
+    <div class="filter-header">
+      <h3><mat-icon color="primary">filter_alt</mat-icon> Filtro de Referencias</h3>
 
-<!-- 🔹 Filtro existente -->
-<mat-card class="mat-elevation-z4">
-  <mat-card-title class="title">
-    <mat-icon color="primary">filter_alt</mat-icon>
-    Filtro de Referencias
-  </mat-card-title>
+      <div class="filter-actions">
+        <button mat-raised-button color="accent" (click)="openCreateDialog()">
+          <mat-icon>add_circle</mat-icon> Crear referencia
+        </button>
+      </div>
+    </div>
 
-  <form (ngSubmit)="applyFilter()" [formGroup]="filterForm" class="filter-form">
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha Inicio</mat-label>
-      <input matInput type="datetime-local" formControlName="startDate">
-    </mat-form-field>
+    <!-- Campos de filtro -->
+    <form (ngSubmit)="applyFilter()" [formGroup]="filterForm" class="filter-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput type="datetime-local" formControlName="startDate">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha Fin</mat-label>
-      <input matInput type="datetime-local" formControlName="endDate">
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput type="datetime-local" formControlName="endDate">
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Estado</mat-label>
-      <mat-select formControlName="status">
-        <mat-option value="01">Creado</mat-option>
-        <mat-option value="02">Pagado</mat-option>
-        <mat-option value="03">Cancelado</mat-option>
-        <mat-option value="04">Expirado</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="01">Creado</mat-option>
+          <mat-option value="02">Pagado</mat-option>
+          <mat-option value="03">Cancelado</mat-option>
+          <mat-option value="04">Expirado</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">
-      Aplicar Filtro
-    </button>
-  </form>
-</mat-card>
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>filter_alt</mat-icon> Aplicar Filtro
+      </button>
+    </form>
+  </mat-card>
 
-<!-- 🔹 Tabla de resultados -->
-<div class="references-container" *ngIf="!loading; else loadingTemplate">
-  <mat-card class="mat-elevation-z4">
+  <!-- 🔸 Tabla de resultados -->
+  <mat-card class="results-card mat-elevation-z4">
     <mat-card-title class="title">
       <mat-icon color="primary">receipt_long</mat-icon>
       Referencias de pago
     </mat-card-title>
 
-
     <div class="table-wrapper">
       <table mat-table [dataSource]="list" class="mat-elevation-z8">
-        <!-- Columnas existentes -->
+        <!-- Columnas -->
         <ng-container matColumnDef="reference">
           <th mat-header-cell *matHeaderCellDef>Referencia</th>
-          <td mat-cell *matCellDef="let element">{{ element.reference }}</td>
+          <td mat-cell *matCellDef="let e">{{ e.reference }}</td>
         </ng-container>
 
-         <ng-container matColumnDef="paymentId">
-          <th mat-header-cell *matHeaderCellDef>ID</th>
-          <td mat-cell *matCellDef="let element">{{ element.paymentId }}</td>
+        <ng-container matColumnDef="paymentId">
+          <th mat-header-cell *matHeaderCellDef>ID  </th>
+          <td mat-cell *matCellDef="let e">{{ e.paymentId }}</td>
         </ng-container>
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descripción</th>
-          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+          <td mat-cell *matCellDef="let e">{{ e.description }}</td>
         </ng-container>
 
         <ng-container matColumnDef="amount">
           <th mat-header-cell *matHeaderCellDef>Monto</th>
-          <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+          <td mat-cell *matCellDef="let e">{{ e.amount }}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Estado</th>
-          <td mat-cell *matCellDef="let element">
-            <span [ngClass]="getStatusClass(element.status)">
-              {{ getStatusLabel(element.status) }}
+          <td mat-cell *matCellDef="let e">
+            <span [ngClass]="getStatusClass(e.status)">
+              {{ getStatusLabel(e.status) }}
             </span>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-stroked-button color="warn" (click)="cancel(element)" [disabled]="element.status === '03'">
+          <td mat-cell *matCellDef="let e">
+            <button mat-stroked-button color="warn" (click)="cancel(e)" [disabled]="e.status === '03'">
               <mat-icon>cancel</mat-icon> Cancelar
             </button>
-            <button mat-stroked-button color="primary" (click)="downloadPdf(element)">
+            <button mat-stroked-button color="primary" (click)="downloadPdf(e)">
               <mat-icon>download</mat-icon> PDF
             </button>
           </td>
@@ -127,15 +128,5 @@
       </table>
     </div>
   </mat-card>
-</div>
 
-<ng-template #loadingTemplate>
-  <div class="loading-spinner">
-    <mat-spinner diameter="50"></mat-spinner>
-    <p>Cargando referencias...</p>
-  </div>
-</ng-template>
-
-<div *ngIf="error" class="error-message">
-  <mat-icon color="warn">error_outline</mat-icon> {{ error }}
 </div>

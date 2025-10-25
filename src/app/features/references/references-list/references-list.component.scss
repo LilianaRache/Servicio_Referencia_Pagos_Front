@@ -1,77 +1,125 @@
-.references-container {
-  padding: 24px;
+/* 🔹 Toolbar */
+.toolbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-mat-card {
-  width: 100%;
-  max-width: 1000px;
-  padding: 16px;
-  border-radius: 16px;
+.spacer {
+  flex: 1 1 auto;
 }
 
-.title {
+.logout-btn {
+  font-weight: 500;
+}
+
+/* 🔹 Contenedor principal */
+.main-container {
+  max-width: 1250px;
+  margin: 30px auto;
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 🔹 Filtro de fechas y estado */
+.filter-card {
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+mat-form-field {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* 🔹 BLOQUE DE BÚSQUEDA (Referencia + Payment ID) */
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background-color: #05050599; 
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔹 Campos de texto dentro del filtro */
+.search-field {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* Mantener el color morado SIEMPRE */
+.search-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #7b1fa2; /* morado Angular Material */
+  border-color: #7b1fa2 !important;
+}
+
+.search-field .mat-form-field-label {
+  color: #7b1fa2 !important;
+  font-weight: 500;
+}
+
+.search-field .mat-input-element {
+  color: #1d1d1d;
+}
+
+/* 🔹 Botones dentro del filtro */
+.search-row button {
+  height: 42px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+/* 🔹 Tabla y resultados */
+.results-card {
+  padding: 20px;
 }
 
 .table-wrapper {
   overflow-x: auto;
 }
 
-mat-header-cell, mat-cell {
-  padding: 12px 16px;
+table {
+  width: 100%;
 }
 
-mat-header-cell {
-  background: #f4f6f8;
-  font-weight: 600;
-}
-
-.loading-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 60px;
-  color: #555;
-}
-
-.error-message {
-  color: #d32f2f;
+.title {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  margin-top: 20px;
 }
 
-/* Estado visual */
-span[ngClass] {
-  padding: 4px 10px;
-  border-radius: 12px;
+button[mat-raised-button],
+button[mat-stroked-button] {
+  text-transform: none;
   font-weight: 500;
-  text-transform: capitalize;
 }
 
-.status-active {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+
+/* Aumentar espacio entre columnas ID y Descripción */
+.table-wrapper table th:nth-child(2),
+.table-wrapper table td:nth-child(2) {
+  padding-right: 60px !important; /* separa la columna ID */
+  text-align: center; /* opcional: centra los números de ID */
 }
 
-.status-cancelled {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-.status-pending {
-  background-color: #fff8e1;
-  color: #f9a825;
-}
-
-td button {
-  margin-right: 8px;
+/* Opcional: mantener un espaciado equilibrado entre todas las columnas */
+.table-wrapper table th,
+.table-wrapper table td {
+  padding: 12px 16px;
 }
