@@ -3,6 +3,11 @@
   <span>Gestión de Referencias</span>
   <span class="spacer"></span>
 
+  <button mat-stroked-button color="warn" (click)="logout()">
+    <mat-icon>logout</mat-icon> Cerrar sesión
+  </button>
+</mat-toolbar>
+
   <div class="search-row" style="display:flex; gap:12px; align-items:center;">
     <mat-form-field appearance="outline" class="search-field" style="flex:1; min-width:200px;">
       <mat-label>Referencia</mat-label>
@@ -29,7 +34,6 @@
   <button mat-raised-button color="accent" (click)="openCreateDialog()">
     <mat-icon>add_circle</mat-icon> Crear referencia
   </button>
-</mat-toolbar>
 
 <!-- 🔹 Filtro existente -->
 <mat-card class="mat-elevation-z4">
@@ -72,7 +76,7 @@
       <mat-icon color="primary">receipt_long</mat-icon>
       Referencias de pago
     </mat-card-title>
-    
+
 
     <div class="table-wrapper">
       <table mat-table [dataSource]="list" class="mat-elevation-z8">

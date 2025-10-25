@@ -4,9 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentReferenceService } from '../../../core/services/payment-reference.service';
 import { PaymentReferenceResponse } from '../../../core/models/payment-reference-response';
 import { CancelReferenceDialogComponent } from '../cancel-reference-dialog/cancel-reference-dialog.component';
+import { ConfirmCancelPopupComponent } from '../confirm-cancel-popup/confirm-cancel-popup.component';
 import { formatDate } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReferenceFormComponent } from '../reference-form/reference-form.component';
+import { PaymentCancelRequest } from 'src/app/core/models/payment-cancel-request';
 
 @Component({
   selector: 'app-references-list',
@@ -113,15 +115,12 @@ export class ReferencesListComponent implements OnInit {
   openCreateDialog() {
     const dialogRef = this.dialog.open(ReferenceFormComponent, {
       width: '500px',
-      data: {} 
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.svc.create(result).subscribe({
-          next: () => this.applyFilter(),
-          error: () => alert('❌ No se pudo crear la referencia')
-        });
+          this.applyFilter();
       }
     });
   }
@@ -131,18 +130,27 @@ export class ReferencesListComponent implements OnInit {
   }
 
   cancel(reference: PaymentReferenceResponse) {
-    const dialogRef = this.dialog.open(CancelReferenceDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelPopupComponent, {
       width: '400px',
-      data: { ...reference }
+      data: { reference: reference.reference, updateDescription: '' }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.svc.update(result).subscribe({
-          next: () => this.applyFilter(),
-          error: () => alert('No se pudo cancelar la referencia')
-        });
-      }
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (!result) return;
+
+      const payload: PaymentCancelRequest = {
+        reference: reference.reference,
+        status: '03' as '03',
+        updateDescription: 'Cancelada por el usuario'
+      };
+
+      this.svc.update(payload).subscribe({
+        next: () => {
+          alert('✅ Referencia cancelada correctamente');
+          this.applyFilter();
+        },
+        error: () => alert('❌ No se pudo cancelar la referencia')
+      });
     });
   }
 
@@ -186,6 +194,11 @@ export class ReferencesListComponent implements OnInit {
       case '04': return 'status-expired';
       default: return '';
     }
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
 }

@@ -1,0 +1,33 @@
+<div class="cancel-dialog">
+  <h2 mat-dialog-title class="dialog-title">
+    <mat-icon color="warn">highlight_off</mat-icon>
+    Cancelar referencia
+  </h2>
+
+  <mat-dialog-content class="dialog-content">
+    <div class="reference-box">
+      <span class="label">Referencia:</span>
+      <span class="value">{{ data.reference }}</span>
+    </div>
+
+    <mat-form-field appearance="outline" class="w-full mt-4">
+      <mat-label>Motivo de cancelación</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="data.updateDescription"
+        placeholder="Escribe una breve descripción del motivo"
+        rows="3"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button color="primary" (click)="onCancel()">
+      <mat-icon>close</mat-icon> Cerrar
+    </button>
+
+    <button mat-raised-button color="warn" (click)="onConfirm()">
+      <mat-icon>delete_forever</mat-icon> Confirmar cancelación
+    </button>
+  </mat-dialog-actions>
+</div>

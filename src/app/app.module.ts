@@ -18,6 +18,7 @@ import { ReferenceDetailComponent } from './features/references/reference-detail
 // Interceptor
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { CancelReferenceDialogComponent } from './features/references/cancel-reference-dialog/cancel-reference-dialog.component';
+import { ConfirmCancelPopupComponent } from './features/references/confirm-cancel-popup/confirm-cancel-popup.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CancelReferenceDialogComponent } from './features/references/cancel-ref
     ReferencesListComponent,
     ReferenceFormComponent,
     ReferenceDetailComponent,
-    CancelReferenceDialogComponent
+    CancelReferenceDialogComponent,
+    ConfirmCancelPopupComponent
   ],
   imports: [
     BrowserModule,
