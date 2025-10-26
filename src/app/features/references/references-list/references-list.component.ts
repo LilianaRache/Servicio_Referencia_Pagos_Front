@@ -104,7 +104,6 @@ export class ReferencesListComponent implements OnInit {
     });
   }
 
-  // 🔄 Limpiar búsqueda
   clearSearch() {
     this.searchReferenceValue = '';
     this.searchPaymentIdValue = '';

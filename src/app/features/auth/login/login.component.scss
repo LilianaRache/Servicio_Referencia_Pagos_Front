@@ -1,11 +1,9 @@
-/* Container principal: split screen */
 .login-container {
   display: flex;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
 
-/* Lado izquierdo: bienvenida */
 .login-left {
   flex: 1;
   background: linear-gradient(135deg, #6b5bff, #ff7eb3);
@@ -26,7 +24,6 @@
   line-height: 1.5;
 }
 
-/* Lado derecho: formulario */
 .login-right {
   flex: 1;
   display: flex;

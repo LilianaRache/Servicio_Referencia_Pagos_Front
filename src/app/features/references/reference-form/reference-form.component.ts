@@ -25,7 +25,7 @@ export class ReferenceFormComponent {
   constructor(
     private svc: PaymentReferenceService,
     public router: Router,
-    public dialogRef?: MatDialogRef<ReferenceFormComponent>, // opcional para soporte modal
+    public dialogRef?: MatDialogRef<ReferenceFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data?: any
   ) { }
 
@@ -54,11 +54,9 @@ export class ReferenceFormComponent {
         const payment: PaymentCreateResponse = res.data;
         alert(`Referencia creada: ${payment.reference || payment.paymentId}`);
 
-        // ✅ si está en modal, cerramos y devolvemos el resultado
         if (this.dialogRef) {
           this.dialogRef.close(this.model);
         } else {
-          // ✅ si no está en modal, navegamos como antes
           this.router.navigate(['/references']);
         }
       },

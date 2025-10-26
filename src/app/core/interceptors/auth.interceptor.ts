@@ -24,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401 || err.status === 403) {
-          // token expirado o no autorizado -> enviar a login
           this.auth.logout();
         }
         return throwError(() => err);

@@ -48,7 +48,7 @@ export class AuthService {
     const token = this.getToken();
     if (!token) return false;
     try {
-      const decoded: any = jwt_decode(token); // ✅ Funciona con JWTs estándar
+      const decoded: any = jwt_decode(token);
       const exp = decoded?.exp;
       if (!exp) return false;
       const now = Math.floor(Date.now() / 1000);

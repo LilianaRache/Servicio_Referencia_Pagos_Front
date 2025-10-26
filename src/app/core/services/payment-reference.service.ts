@@ -48,7 +48,7 @@ export class PaymentReferenceService {
 
   downloadPdf(id: number): Observable<Blob> {
     return this.http.get(`${this.base}/payment/${id}/pdf`, {
-      responseType: 'blob' // 👈 importante para recibir archivos binarios
+      responseType: 'blob' // importante: para recibir archivos binarios
     });
   }
 

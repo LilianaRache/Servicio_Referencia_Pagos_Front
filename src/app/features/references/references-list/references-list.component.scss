@@ -1,4 +1,3 @@
-/* 🔹 Toolbar */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -12,7 +11,6 @@
   font-weight: 500;
 }
 
-/* 🔹 Contenedor principal */
 .main-container {
   max-width: 1250px;
   margin: 30px auto;
@@ -21,7 +19,6 @@
   gap: 24px;
 }
 
-/* 🔹 Filtro de fechas y estado */
 .filter-card {
   padding: 20px;
   border-radius: 12px;
@@ -45,7 +42,6 @@ mat-form-field {
   min-width: 220px;
 }
 
-/* 🔹 BLOQUE DE BÚSQUEDA (Referencia + Payment ID) */
 .search-row {
   display: flex;
   flex-wrap: wrap;
@@ -57,15 +53,13 @@ mat-form-field {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
-/* 🔹 Campos de texto dentro del filtro */
 .search-field {
   flex: 1;
   min-width: 220px;
 }
 
-/* Mantener el color morado SIEMPRE */
 .search-field.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: #7b1fa2; /* morado Angular Material */
+  color: #7b1fa2;
   border-color: #7b1fa2 !important;
 }
 
@@ -78,14 +72,12 @@ mat-form-field {
   color: #1d1d1d;
 }
 
-/* 🔹 Botones dentro del filtro */
 .search-row button {
   height: 42px;
   font-weight: 500;
   text-transform: none;
 }
 
-/* 🔹 Tabla y resultados */
 .results-card {
   padding: 20px;
 }
@@ -110,15 +102,12 @@ button[mat-stroked-button] {
   font-weight: 500;
 }
 
-
-/* Aumentar espacio entre columnas ID y Descripción */
 .table-wrapper table th:nth-child(2),
 .table-wrapper table td:nth-child(2) {
-  padding-right: 60px !important; /* separa la columna ID */
-  text-align: center; /* opcional: centra los números de ID */
+  padding-right: 60px !important;
+  text-align: center;
 }
 
-/* Opcional: mantener un espaciado equilibrado entre todas las columnas */
 .table-wrapper table th,
 .table-wrapper table td {
   padding: 12px 16px;

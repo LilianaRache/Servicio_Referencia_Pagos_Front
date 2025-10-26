@@ -17,12 +17,3 @@ export class AuthGuard implements CanActivate {
 
 }
 
-
-
-//TODO: Borrar, solo para pruebas
-
-// canActivate(): boolean {
-//   // 🔓 Skip autenticación temporalmente
-//   console.warn('⚠️ AuthGuard deshabilitado temporalmente para pruebas');
-//   return true;
-// }

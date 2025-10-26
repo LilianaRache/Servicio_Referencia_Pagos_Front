@@ -12,13 +12,12 @@ import { ConfirmCancelPopupComponent } from '../confirm-cancel-popup/confirm-can
 export class CancelReferenceDialogComponent {
 
   constructor(
-    private dialog: MatDialog, // ✅ Inyectamos MatDialog para abrir popups
-    private snackBar: MatSnackBar, // ✅ Inyectamos snackbar para mostrar mensajes
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<CancelReferenceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PaymentCancelRequest
   ) {}
 
-  // ✅ Confirma cancelación
   onConfirm(): void {
     const confirmDialog = this.dialog.open(ConfirmCancelPopupComponent, {
       width: '350px',
@@ -27,13 +26,8 @@ export class CancelReferenceDialogComponent {
 
     confirmDialog.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // Cambia el estado a '03' (Cancelado)
         this.data.status = '03';
-
-        // Cierra el diálogo original devolviendo los datos modificados
         this.dialogRef.close(this.data);
-
-        // ✅ Mostrar mensaje visual de confirmación
         this.snackBar.open(
           `Referencia ${this.data.reference} cancelada correctamente.`,
           'Cerrar',

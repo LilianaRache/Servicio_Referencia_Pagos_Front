@@ -1,27 +1,70 @@
-# ReferencedPaymentsFrontend
+# 💳 Referenced Payments Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
+Interfaz web desarrollada en Angular para la gestión y consulta de referencias de pago.
+Se conecta con la API REST del backend referenced-payments-api para permitir autenticación, creación, consulta y cancelación de pagos.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Requisitos previos
 
-## Code scaffolding
+- Asegúrate de tener instalados:
+- Node.js (versión 16 o superior)
+- Angular CLI (recomendado: npm install -g @angular/cli)
+- Docker y Docker Compose (opcional, para entorno contenedorizado).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## 🧩 Instalación y ejecución local
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Desde la carpeta raíz del frontend (referenced-payments-frontend):
 
-## Running unit tests
+- 1️⃣ Instalar dependencias
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- 2️⃣ Ejecutar la aplicación en modo desarrollo
+ng serve --open
 
-## Running end-to-end tests
+Luego abre en tu navegador:
+👉 http://localhost:4200
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+La aplicación se recargará automáticamente al modificar cualquier archivo fuente.
 
-## Further help
+## 🏗️ Compilación del proyecto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para generar una versión optimizada para producción:
+
+    npm run build
+
+Los archivos compilados quedarán disponibles en la carpeta dist/.
+
+
+## 🐳 Ejecución con Docker
+
+Si deseas ejecutar el frontend dentro de un contenedor Docker:
+
+- 1️⃣ Detener y limpiar contenedores previos
+docker-compose down -v
+
+- 2️⃣ Construir la imagen desde cero
+docker-compose build --no-cache
+
+-  3️⃣ Levantar la aplicación
+docker-compose up
+
+Una vez desplegada, la aplicación estará disponible en:
+👉 http://localhost:4200
+
+
+## ⚙️ Variables de entorno
+
+Edita el archivo src/environments/environment.ts (o environment.prod.ts) para ajustar la URL base de la API del backend:
+
+export const environment = {
+  production: false,
+  apiBaseUrl: 'http://localhost:8080'
+};
+
+
+## 👩‍💻 Autor
+
+Desarrollado por Jeimmy Liliana Rache Camargo
+💼 Ingeniera de Software | Arquitectura y Desarrollo Full Stack
+

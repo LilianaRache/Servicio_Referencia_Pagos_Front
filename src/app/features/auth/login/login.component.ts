@@ -56,8 +56,8 @@ export class LoginComponent {
 
         if (token) {
           console.log('✅ TOKEN RECIBIDO:', token);
-          this.authService.setToken(token); // Guardar el token en el servicio de autenticación
-          localStorage.setItem('jwtToken', token); // También puedes guardarlo en localStorage si quieres persistencia
+          this.authService.setToken(token);
+          localStorage.setItem('jwtToken', token);
 
           console.log('➡️ Intentando navegar a /references...');
 

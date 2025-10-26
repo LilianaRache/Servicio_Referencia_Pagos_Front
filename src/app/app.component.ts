@@ -17,7 +17,7 @@ export class AppComponent {
       this.auth.logout();
     }
   }, 180_000);
-  //60_000); // chequea cada minuto
+  //60_000); -> chequea cada minuto
 }
 
 }
