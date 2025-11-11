@@ -32,9 +32,10 @@
         <!-- Due Date -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Fecha de vencimiento</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="model.dueDate" name="dueDate" required>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="model.dueDate" [min]="minDate" name="dueDate" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error>La fecha debe ser igual o posterior a hoy</mat-error>
         </mat-form-field>
 
         <!-- Callback URL -->

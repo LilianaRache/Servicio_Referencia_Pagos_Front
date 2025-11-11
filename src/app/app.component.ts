@@ -16,7 +16,7 @@ export class AppComponent {
     if (!this.auth.isAuthenticated()) {
       this.auth.logout();
     }
-  }, 180_000);
+  }, 60_000);
   //60_000); -> chequea cada minuto
 }
 

@@ -21,6 +21,7 @@ export class ReferenceFormComponent {
 
   loading = false;
   error = '';
+   minDate: Date = new Date();
 
   constructor(
     private svc: PaymentReferenceService,

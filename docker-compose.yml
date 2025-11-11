@@ -1,3 +1,4 @@
+version: '3.8'
 services:
   frontend:
     build: .
@@ -5,3 +6,9 @@ services:
     ports:
       - "4200:80"
     restart: always
+    networks:
+      - referenced-network
+
+networks:
+  referenced-network:
+    external: true
